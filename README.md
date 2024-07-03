@@ -10,7 +10,7 @@ Added via file upload because of the configuration with my personal account and 
 
 This project acts as an ETL service to obtain and load data for an exercise.
 
-Please ask any questions with thoughts or concerns, Failing a pre-employment screening after being asked to write an exercise is not a nice feeling when these exercises represent a day of my life to create, a simple question or asking for clarification on something is something I would be more than happy to anwser.
+Please ask any questions with thoughts or concerns, Failing a pre-employment screening after being asked to write an exercise is not a nice feeling when these exercises represent a day of my life to create, a simple question or asking for clarification on an area or pattern is something I would be more than happy to anwser.
 
 https://www.linkedin.com/in/travis-haycock-b9a53b2a0/
 
