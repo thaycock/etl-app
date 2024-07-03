@@ -1,7 +1,7 @@
 
 # FYI
 
-Original git commit history had 33 commits and this took me about 10 hours total to create
+Original git commit history had 33 commits and this took me about 10 hours total to create.
 
 Added via file upload because of the configuration with my personal account and key management. The Pycache files should not be in there but they are even though they are specified to not be inlcluded in the gitignore. This can be fixed by deleting them and doing another git init if they are still tracked by the diff system.
 
@@ -10,7 +10,7 @@ Added via file upload because of the configuration with my personal account and 
 
 This project acts as an ETL service to obtain and load data for an exercise.
 
-Please ask any questions with thoughts or concerns, Failing a pre-employment screening after being asked to write an exercise is not a nice feeling when these exercises represent a day of my life to create, a simple question or asking for clarification on something is something I would happily answer
+Please ask any questions with thoughts or concerns, Failing a pre-employment screening after being asked to write an exercise is not a nice feeling when these exercises represent a day of my life to create, a simple question or asking for clarification on something is something I would be more than happy to anwser.
 
 https://www.linkedin.com/in/travis-haycock-b9a53b2a0/
 
@@ -91,7 +91,7 @@ Transformation is done inside the `__extract_zip_file` which in this context are
 
 # Loaders
 
-adopted idea of loaders, each request or different future areas of the apps that load data from different sources would have their own loaders for testability and seperation of concerns
+adopted idea of loaders, each request or different future areas of the apps that load data from different sources would have their own loaders for testability and seperation of concerns.
 
 
 # Theme
