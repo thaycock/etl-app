@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: Book Library API
+  version: 1.0.0
+  description: API for managing and retrieving information about books in the library.
+
+paths:
+  /status:
+    get:
+      summary: Get public status check
+      responses:
+        '200':
+          description: Server is operational
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: "Public status check endpoint is operational"
+
+
+  /start-etl-job:
+    get:
+      summary: Start ETL Job
+      description: Initiates the ETL job.
+      responses:
+        '200':
+          description: ETL job started successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: Job has started
+
+  /latest-event-data:
+      get:
+        summary: Get Latest Event Data
+        description: Retrieves the latest event data.
+        responses:
+          '200':
+            description: Latest event data retrieved successfully
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    success:
+                      type: boolean
+                      example: true
+                    data:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          global_event_id:
+                            type: integer
+                            example: 1184563666
+                          sql_date:
+                            type: string
+                            example: "Sat, 29 Jun 2024 00:00:00 GMT"
+                          event_code:
+                            type: string
+                            example: "43"
+                          event_base_code:
+                            type: string
+                            example: "43"
+                          event_root_code:
+                            type: string
+                            example: "4"
+                          action_geo_full_name:
+                            type: string
+                            example: "United States"
+                          action_geo_country_code:
+                            type: string
+                            example: "US"
+                          action_geo_lat:
+                            type: number
+                            format: float
+                            example: 39.828175
+                          action_geo_long:
+                            type: number
+                            format: float
+                            example: -98.5795
+                          date_added:
+                            type: string
+                            example: "Sat, 29 Jun 2024 00:00:00 GMT"
+                          source_url:
+                            type: string
+                            example: "https://www.pennlive.com/opinion/2024/06/trump-needs-to-be-held-accountable-pennlive-letters.html"
+                          upload_date:
+                            type: string
+                            example: "Wed, 03 Jul 2024 04:31:24 GMT"

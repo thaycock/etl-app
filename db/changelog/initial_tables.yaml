@@ -1,0 +1,108 @@
+databaseChangeLog:
+
+- changeSet:
+    id: 1
+    author: thaycock
+    changes:
+      - createTable:
+          tableName: us_event_data
+          columns:
+            - column:
+                name: global_event_id
+                type: uuid
+                constraints:
+                  primaryKey: true
+                  defaultValueComputed: uuid_generate_v4()
+            - column:
+                name: sql_date
+                type: date
+                constraints:
+                  nullable: false
+            - column:
+                name: event_code
+                type: text
+                constraints:
+                  nullable: false
+            - column:
+                name: event_base_code
+                type: text
+                constraints:
+                  nullable: false
+            - column:
+                name: event_root_code
+                type: text
+                constraints:
+                  nullable: false
+            - column:
+                name: action_geo_full_name
+                type: text
+                constraints:
+                  nullable: false
+            - column:
+                name: action_geo_country_code
+                type: text
+                constraints:
+                  nullable: false
+            - column:
+                name: action_geo_lat
+                type: double precision
+                constraints:
+                  nullable: false
+            - column:
+                name: action_geo_long
+                type: double precision
+                constraints:
+                  nullable: false
+            - column:
+                name: date_added
+                type: date
+                constraints:
+                  nullable: false
+            - column:
+                name: source_url
+                type: text
+                constraints:
+                  nullable: false
+            - column:
+                name: upload_date
+                type: timestamptz
+                constraints:
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  nullable: false
+- changeSet:
+    id: enable_uuid_ossp_extension
+    author: thaycock
+    changes:
+      - sql:
+          dbms: postgresql
+          splitStatements: true
+          stripComments: true
+          sql: |
+            CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+- changeSet:
+    id: 2
+    author: thaycock
+    changes:
+      - modifyDataType:
+          columnName: global_event_id
+          newDataType: uuid
+          tableName: us_event_data
+
+- changeSet:
+    id: 3
+    author: thaycock
+    changes:
+      - modifyDataType:
+          columnName: global_event_id
+          newDataType: text
+          tableName: us_event_data
+
+- changeSet:
+    id: 4
+    author: thaycock
+    changes:
+      - modifyDataType:
+          columnName: global_event_id
+          newDataType: int
+          tableName: us_event_data

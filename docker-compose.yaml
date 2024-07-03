@@ -1,0 +1,60 @@
+version: '3.5'
+
+services:
+  api-travjav:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: api-travjav:latest
+    command: ./scripts/run-dev.sh
+    environment:
+      - RUNTIME_ENVIRONMENT=DEV
+      - IS_MIDDLEWARE_ENABLED=true
+      - DB_NAME=remotedb
+      - DATABASENAME=postgresql://in-memory-db:5432/remotedb
+      - DB_HOST=in-memory-db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - FLASK_APP=apihealth.src.health.api:app
+      - DATA_SOURCE=http://data.gdeltproject.org/gdeltv2/20240629184500.export.CSV.zip
+    ports:
+      - '127.0.0.1:5000:5000'
+    depends_on:
+      - in-memory-db
+    volumes:
+      - .:/opt/app
+
+  in-memory-db:
+    image: postgres:9.6
+    ports:
+      - '5433:5432'
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: remotedb
+    volumes:
+      - pg_dv:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-h", "localhost", "-p", "5432", "-U", "postgres", "-d", "remotedb"]
+      interval: 10s
+      retries: 5
+      start_period: 2s
+
+  liquibase:
+    image: liquibase/liquibase
+    # When the checksums need to be cleared due to liquibase file being modified
+    #entrypoint: ["sh", "-c", "apk add --no-cache nc && until nc -z in-memory-db 5432; do echo waiting for postgres; sleep 2; done; liquibase --url=jdbc:postgresql://in-memory-db:5432/remotedb --username=postgres --password=password clearCheckSums"]
+    entrypoint: ["sh", "-c", "apk add --no-cache nc && until nc -z in-memory-db 5432; do echo waiting for postgres; sleep 2; done; liquibase --url=jdbc:postgresql://in-memory-db:5432/remotedb --username=postgres --password=password --changeLogFile=changelog/initial_tables.yaml update"]
+    environment:
+      - LIQUIBASE_URL=jdbc:postgresql://in-memory-db:5432/remotedb
+      - LIQUIBASE_USERNAME=postgres
+      - LIQUIBASE_PASSWORD=lacatalina
+    depends_on:
+      in-memory-db:
+        condition: service_healthy
+    volumes:
+      - ./db/changelog:/liquibase/changelog
+
+volumes:
+  pg_dv:
