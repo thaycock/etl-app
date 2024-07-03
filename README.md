@@ -1,3 +1,9 @@
+
+# FYI
+
+Added via file upload because of the configuration with my personal account and key management. The Pycache files should not be in there but they are even though they are specified to not be inlcluded in the gitignore. This can be fixed by deleting them and doing another git init if they are still tracked by the diff system.
+
+
 # Project
 
 This project acts as an ETL service to obtain and load data for an exercise.
